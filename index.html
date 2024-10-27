@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>滚动与缩放的图片浏览</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            width: 100vw;
+        }
+
+        .split {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .top, .bottom {
+            flex: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 0;
+            width: 100%;
+        }
+
+        .image-container {
+            padding: 0; /* 去掉内边距 */
+            margin: 0; /* 去掉外边距 */
+        }
+
+        .image {
+            width: 100vw; /* 设置为100vw以消除左右留白 */
+            display: block;
+            transition: transform 0.1s ease-out;
+            margin: 0; /* 去掉图片底部的间隔 */
+        }
+    </style>
+</head>
+<body>
+    <div class="split">
+        <!-- 上半部分显示图片 -->
+        <div class="top" id="top">
+            <div class="image-container" id="image-container-top">
+                <!-- 动态生成上半部分的图片 -->
+            </div>
+        </div>
+
+        <!-- 下半部分显示图片 -->
+        <div class="bottom" id="bottom">
+            <div class="image-container" id="image-container-bottom">
+                <!-- 动态生成下半部分的图片 -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 恢复滚动位置
+        window.onload = function() {
+            document.getElementById('top').scrollTop = localStorage.getItem('topScroll') || 0;
+            document.getElementById('bottom').scrollTop = localStorage.getItem('bottomScroll') || 0;
+        };
+
+        // 保存滚动位置
+        document.getElementById('top').onscroll = function() {
+            localStorage.setItem('topScroll', this.scrollTop);
+        };
+        document.getElementById('bottom').onscroll = function() {
+            localStorage.setItem('bottomScroll', this.scrollTop);
+        };
+
+        // 动态生成上半部分图片列表
+        const imageContainerTop = document.getElementById('image-container-top');
+        for (let i = 301; i <= 579; i++) {
+            const img = document.createElement('img');
+            img.src = `File_${String(i).padStart(5, '0')}.jpeg`;
+            img.alt = `Image ${i}`;
+            img.className = 'image';
+            imageContainerTop.appendChild(img);
+        }
+
+        // 动态生成下半部分图片列表
+        const imageContainerBottom = document.getElementById('image-container-bottom');
+        for (let i = 1; i <= 301; i++) {
+            const img = document.createElement('img');
+            img.src = `File ${String(i).padStart(5, '0')}.jpeg`;
+            img.alt = `Image ${i}`;
+            img.className = 'image';
+            imageContainerBottom.appendChild(img);
+        }
+    </script>
+</body>
+</html>

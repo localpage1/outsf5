@@ -74,9 +74,9 @@
 
         // 动态生成上半部分图片列表
         const imageContainerTop = document.getElementById('image-container-top');
-        for (let i = 301; i <= 579; i++) {
+        for (let i = 1; i <= 289; i++) {
             const img = document.createElement('img');
-            img.src = `File_${String(i).padStart(5, '0')}.jpeg`;
+            img.src = `비탄의 아리아 05-${i}.png`;
             img.alt = `Image ${i}`;
             img.className = 'image';
             imageContainerTop.appendChild(img);
@@ -84,9 +84,9 @@
 
         // 动态生成下半部分图片列表
         const imageContainerBottom = document.getElementById('image-container-bottom');
-        for (let i = 1; i <= 301; i++) {
+        for (let i = 1; i <= 264; i++) {
             const img = document.createElement('img');
-            img.src = `File ${String(i).padStart(5, '0')}.jpeg`;
+            img.src = `Hidan no Aria vol.05-${i}.png`;
             img.alt = `Image ${i}`;
             img.className = 'image';
             imageContainerBottom.appendChild(img);
